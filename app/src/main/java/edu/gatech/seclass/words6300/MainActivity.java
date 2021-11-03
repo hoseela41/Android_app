@@ -4,17 +4,19 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
-import android.widget.Toast;
+
+
+import java.io.BufferedWriter;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class MainActivity extends AppCompatActivity {
+    private static final String FILE_NAME = "ScoreHistory.json";
+    FileWriter fileWriter = null;
+    BufferedWriter bufferedWriter =null;
     DataHolder dataHolder;
 
     @Override
@@ -22,82 +24,36 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         dataHolder = DataHolder.getInstance();
-        if (dataHolder.getGameStatus()) {
-            Toast.makeText(this, "Your previous game status have been cached", Toast.LENGTH_LONG).show();
-        }
-    }
+        dataHolder.setCurrDirectory(this.getFilesDir());
 
-    public void handleClick(View view) {
-        if (view.getId() == R.id.play) {
-            Intent intent = new Intent(this, game.class);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.Settings) {
-            Intent intent = new Intent(this, settings.class);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.view_stats) {
-            Intent intent = new Intent(this, Stats.class);
-            startActivity(intent);
-        }
-    }
-}
-
-
-
-
-
-
-/*
-package edu.gatech.seclass.words6300;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-public class MainActivity extends AppCompatActivity {
-    DatabaseHelper myDb;
-    EditText editText, editScore;
-    Button btnAddData;
-    private Button viewStatistics;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //click to Statistics main page
-        viewStatistics = (Button) findViewById(R.id.viewStatistics);
-
-        viewStatistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                viewStatisticsActivity();
-
-
+        File file = new File(this.getFilesDir(), FILE_NAME);
+        if(!file.exists()) {
+            try {
+                file.createNewFile();
+                fileWriter = new FileWriter(file.getAbsoluteFile());
+                bufferedWriter = new BufferedWriter(fileWriter);
+                bufferedWriter.write("{}");
+                bufferedWriter.close();
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        });
-    }
 
+        }
 
-    private void viewStatisticsActivity(){
-        Intent intent = new Intent(this, Stats.class);
-        startActivity(intent);
+        WriteToJSON.WriteJSON("yding318", 10);
     }
 
     public void handleClick(View view) {
+        if (view.getId() == R.id.EnterName) {
+            EditText inputName = (EditText) findViewById(R.id.inputName);
+            EditText showWelcome = (EditText) findViewById(R.id.showWelcome);
+            String name = inputName.getText().toString();
+            dataHolder.setCurrUserID(name);
+            String welcomeMessage = WriteToJSON.WriteUserIDJSON(name);
+            showWelcome.setText(welcomeMessage);
+        }
+
+
         if (view.getId() == R.id.play) {
             Intent intent = new Intent(this, game.class);
             startActivity(intent);
@@ -108,75 +64,10 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
         }
 
-        if (view.getId() == R.id.viewStatistics){
-            Intent intent = new Intent (this, Stats.class);
+        if (view.getId() == R.id.ViewScoreStats) {
+            Intent intent = new Intent(this, ViewScoreStats.class);
             startActivity(intent);
         }
-
     }
+
 }
-
-
-
-package edu.gatech.seclass.words6300;
-
-import androidx.appcompat.app.AppCompatActivity;
-
-import android.content.Intent;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-
-import android.view.Menu;
-import android.view.MenuItem;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Toast;
-
-public class MainActivity extends AppCompatActivity {
-
-    private Button viewStatistics;
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-
-        //click to Statistics main page
-        viewStatistics = (Button) findViewById(R.id.viewStatistics);
-
-        viewStatistics.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                viewStatisticsActivity();
-
-
-            }
-        });
-    }
-
-    private void viewStatisticsActivity(){
-        Intent intent = new Intent(this, Stats.class);
-        startActivity(intent);
-    }
-
-    public void handleClick(View view) {
-        if (view.getId() == R.id.play) {
-            Intent intent = new Intent(this, game.class);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.Settings) {
-            Intent intent = new Intent(this, settings.class);
-            startActivity(intent);
-        }
-
-        if (view.getId() == R.id.viewStatistics) {
-            Intent intent = new Intent(this, Stats.class);
-            startActivity(intent);
-        }
-    }
-}
-*/
-

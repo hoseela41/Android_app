@@ -1,17 +1,107 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/view_wordBank"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ViewScoreStats">
 
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="348dp"
+        android:layout_height="59dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="39dp"
+        android:layout_marginEnd="49dp"
+        android:layout_marginBottom="34dp"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
-    <ListView
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/gameScore"/>
-</RelativeLayout>
+        <EditText
+            android:id="@+id/viewScore1"
+            android:layout_width="225dp"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+
+        <Button
+            android:id="@+id/getSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:onClick="handleClick"
+            android:text="Button" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="337dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="34dp"
+        android:layout_marginEnd="37dp"
+        android:layout_marginBottom="46dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2">
+
+        <EditText
+            android:id="@+id/viewScore2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="324dp"
+        android:layout_height="51dp"
+        android:layout_marginStart="37dp"
+        android:layout_marginTop="29dp"
+        android:layout_marginEnd="50dp"
+        android:layout_marginBottom="429dp"
+        android:orientation="vertical"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout">
+
+        <EditText
+            android:id="@+id/viewScore3"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="Name" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="296dp"
+        android:layout_height="220dp"
+        android:layout_marginStart="57dp"
+        android:layout_marginTop="54dp"
+        android:layout_marginEnd="58dp"
+        android:layout_marginBottom="144dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <EditText
+            android:id="@+id/showSetting"
+            android:layout_width="wrap_content"
+            android:layout_height="140dp"
+            android:layout_weight="1"
+            android:text="" />
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

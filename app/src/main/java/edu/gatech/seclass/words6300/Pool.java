@@ -12,32 +12,12 @@ public class Pool implements Serializable {
     private int size = 100;
     private Map<Character, Integer> alphabetMaps;
     private Map<Character, Integer> alphabetScore;
-    private Map<Character, Integer> map1;
-    private Map<Character, Integer> map2;
-
     private DataHolder dataHolder;
     Pool() {
         dataHolder = DataHolder.getInstance();
         maxTurn = dataHolder.getMaxTurn();
-
-        //deep copy
-        map1 = dataHolder.getAlphabetFreq();
-        map2 = dataHolder.getAlphabetScore();
-
-        alphabetMaps = new HashMap<Character, Integer>();
-        alphabetScore = new HashMap<Character, Integer>();
-
-        for (Map.Entry<Character,Integer> entry : map1.entrySet()){
-            this.alphabetMaps.put(entry.getKey(), entry.getValue());
-        }
-
-        for (Map.Entry<Character,Integer> entry : map2.entrySet()){
-            this.alphabetScore.put(entry.getKey(), entry.getValue());
-        }
-
-
-        //alphabetMaps = dataHolder.getAlphabetFreq();
-        //alphabetScore = dataHolder.getAlphabetScore();
+        alphabetMaps = dataHolder.getAlphabetFreq();
+        alphabetScore = dataHolder.getAlphabetScore();
         generateRack();
     }
 
@@ -74,14 +54,5 @@ public class Pool implements Serializable {
     public int getMaxTurn() {
         return maxTurn;
     }
-
-    Map<Character, Integer> getAlphabetFreq() {
-        return this.alphabetMaps;
-    }
-
-    Map<Character, Integer> getAlphabetScore() {
-        return this.alphabetScore;
-    }
-
 
 }

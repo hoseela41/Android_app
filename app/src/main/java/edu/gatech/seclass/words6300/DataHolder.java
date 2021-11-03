@@ -1,6 +1,7 @@
 package edu.gatech.seclass.words6300;
 
-
+// https://stackoverflow.com/questions/4878159/whats-the-best-way-to-share-data-between-activities
+import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -8,31 +9,10 @@ public class DataHolder {
     private static DataHolder holder = null;
 
     private int maxTurn = 20;
+    private String currUserID = "yding318";
+    private File currDirectory = null;
     private Map<Character, Integer> alphabetFreq;
     private Map<Character, Integer> alphabetScore;
-    private Map<Character, Integer> setting_Freq;
-    private Map<Character, Integer> setting_Score;
-
-    // gameStatus = true  : game is running
-    private boolean gameStatus = false;
-    private Pool pool;
-
-    private char[] boardCharArray;
-    private char[] rackCharArray;
-
-    private int currTurn = 0;
-    private int numSelectedBoard = 0;
-    private int numSelectedRack = 0;
-    private int currScore = 0;
-    private int totalScore = 0;
-    private char chosenBoard;
-    private int chosenBoardId = 0;
-
-    //save current letter stats - fix bug 17
-    private HashMap<String, Integer> letterPlayedMap ;
-    private HashMap<String, Integer> letterDrawnMap ;
-    private HashMap<String, Integer> letterPoolMap ;
-
 
     private DataHolder() {
         alphabetFreq = new HashMap<>();
@@ -109,107 +89,20 @@ public class DataHolder {
         alphabetScore.put(ch, score);
     }
 
-    boolean getGameStatus() {
-        return gameStatus;
+    void setCurrUserID(String s) {
+        currUserID = s;
     }
 
-    void setGameStatus(boolean status) {
-        gameStatus = status;
+    void setCurrDirectory(File s) {
+        currDirectory = s;
     }
 
-    void setPool(Pool inputPool) {
-        pool = inputPool;
+    File getCurrDirectory() {
+        return currDirectory;
     }
 
-    Pool getPool() { return pool; }
-
-    void setBoardCharArray(char[] inputCharArray) {
-        boardCharArray = inputCharArray;
+    String getCurrID() {
+        return currUserID;
     }
-
-    char[] getBoardCharArray() {
-        return boardCharArray;
-    }
-
-    void setRackCharArray(char[] inputCharArray) {
-        rackCharArray = inputCharArray;
-    }
-
-    char[] getRackCharArray() {
-        return rackCharArray;
-    }
-
-    //store current game settings
-    void setLetterPlayedMap( HashMap<String, Integer> map){this.letterPlayedMap = map;};
-    void setLetterDrawnMap(HashMap<String, Integer> map){this.letterDrawnMap = map;};
-    void setLetterPoolMap (HashMap<String, Integer> map){this.letterPoolMap = map;};
-
-    void setAlphabetFreq(HashMap<Character, Integer> map) {this.alphabetFreq = map;}
-    void setAlphabetScore(HashMap<Character, Integer> map) {this.alphabetScore = map;}
-
-    void saveAlphabetFreq(HashMap<Character, Integer> map) {this.setting_Freq = map;}
-    void saveAlphabetScore(HashMap<Character, Integer> map) {this.setting_Score = map;}
-
-    Map<Character, Integer> getSettingFreq() {
-        return this.setting_Freq;
-    }
-
-    Map<Character, Integer> getSettingScore() {
-        return this.setting_Score;
-    }
-
-
-    public HashMap<String, Integer> getLetterPlayedMap() {
-        return letterPlayedMap;
-    }
-
-    public HashMap<String, Integer> getLetterDrawnMap() {
-
-        return letterDrawnMap;
-    }
-
-    public HashMap<String, Integer> getLetterPoolMap() {
-        return letterPoolMap;
-    }
-
-    void setGameParameters(int currTurn, int numSelectedBoard, int numSelectedRack, int currScore, int totalScore,
-                           char chosenBoard, int chosenBoardId) {
-        this.currTurn = currTurn;
-        this.numSelectedBoard = numSelectedBoard;
-        this.numSelectedRack = numSelectedRack;
-        this.currScore = currScore;
-        this.totalScore = totalScore;
-        this.chosenBoard = chosenBoard;
-        this.chosenBoardId = chosenBoardId;
-    }
-
-    int getCurrTurn() {
-        return currTurn;
-    }
-
-    int getNumSelectedBoard() {
-        return numSelectedBoard;
-    }
-
-    int getNumSelectedRack() {
-        return numSelectedRack;
-    }
-
-    int getCurrScore() {
-        return currScore;
-    }
-
-    int getTotalScore() {
-        return totalScore;
-    }
-
-    char getChosenBoard() {
-        return chosenBoard;
-    }
-
-    int getChosenBoardId() {
-        return chosenBoardId;
-    }
-
 
 }
